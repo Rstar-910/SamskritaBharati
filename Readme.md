@@ -1,6 +1,6 @@
 # Sanskrit Speech-to-Text Translation Project
 
-This project explores a speech-to-text translation pipeline for Sanskrit audio using Whisper, translation with Gemini, and voice synthesis using gTTS. It also includes a preprocessing step to enhance transcription quality by isolating vocals from background noise.
+This project aims to build a high-quality **Sanskrit speech-to-text translation system**, with accurate transcription, translation, and voice synthesis. The current work demonstrates basic functionality and ongoing improvements through preprocessing and voice cloning techniques.
 
 ---
 
@@ -8,71 +8,73 @@ This project explores a speech-to-text translation pipeline for Sanskrit audio u
 
 ### 1. `Basic Pipeline.ipynb`
 
-This notebook demonstrates a minimal working pipeline:
+This notebook outlines the core pipeline:
 
-- Input: A clean `.wav` audio file.
-- **Step 1**: Transcription using OpenAI's **Whisper** model.
-- **Step 2**: Translation of transcribed Sanskrit using **Gemini**.
-- **Step 3**: Generating audio of the translated text using **gTTS (Google Text-to-Speech)**.
+- **Input**: A WAV file with Sanskrit speech.
+- **Transcription**: Performed using OpenAI's **Whisper** model.
+- **Translation**: Using **Gemini** to convert Sanskrit text into the target language.
+- **Speech Synthesis**: Translated text is converted to speech using **gTTS (Google Text-to-Speech)**.
 
-> This notebook works well when the input audio is clean and without background disturbances.
+This baseline pipeline works well for clean audio but struggles with background noise or unclear pronunciation.
 
 ---
 
 ### 2. `Preprocessing.ipynb`
 
-To improve transcription in noisy environments, this notebook performs **preprocessing** using source separation techniques:
+To enhance transcription quality in noisy environments, we tested **vocal separation** techniques.
 
-#### Tools Used:
-- **Spleeter** (2-stem: vocal + accompaniment)
-- **Demucs (htdemucs)**: A deep learning model for source separation, more robust than Spleeter in our testing.
+#### Methods Used:
+- **Spleeter**: A 2-stem vocal/accompaniment splitter.
+- **Demucs (htdemucs)**: A more advanced model that produced noticeably better results in our tests.
 
-#### Files Used:
-All audio files are stored in the `audio/` folder:
-- `original.wav` — Original audio input  
-- `spleeter.wav` — Vocal separation using Spleeter  
-- `demucs.wav` — Vocal separation using Demucs  
+#### Audio Files (in `audio/` folder):
+- `original.wav`: Raw input audio.
+- `spleeter.wav`: Output after applying Spleeter.
+- `demucs.wav`: Output after applying Demucs.
 
 ---
 
-## 🎧 Audio Comparison
+## 🎧 Example Output Comparison
 
-Original spoken Sanskrit line:
-> **"यदा यदा हि धर्मस्य ग्लानिर्भवति भारत"**  
-> Transcribed (no preprocessing):  
+Spoken Sanskrit:  
+> **"यदा यदा हि धर्मस्य ग्लानिर्भवति भारत"**
+
+### Without Preprocessing
+> **Transcription**:  
 > _"ভি ডাঁট� Tibharata"_  
-> _(severely degraded, likely due to background noise interference)_
+> _(Heavily degraded, possibly due to background noise)_
+
+### After Spleeter
+> _"जदायदाही भर्मस्ते नानेर्भोप्ती भारुता।"_
+
+### After Demucs
+> _"जदा जदाहि धर्मस्त। लानेर भप्ति भारत।"_
 
 ---
 
-### 🧪 After Preprocessing
+## 📊 Observations
 
-| Method   | Transcription Output                                 |
-|----------|------------------------------------------------------|
-| **Spleeter** | _"जदायदाही भर्मस्ते नानेर्भोप्ती भारुता।"_             |
-| **Demucs**   | _"जदा जदाहि धर्मस्त। लानेर भप्ति भारत।"_                |
-
-### 📊 Observations
-
-- **Demucs** produced significantly better transcription quality, maintaining much closer phonetic structure to the original Sanskrit.
-- **Spleeter**, while useful, introduced distortion and lost clarity in key syllables.
-- These issues may still be partially attributed to **unclear pronunciation** or **recording quality**, which should be addressed in future iterations.
+- **Demucs** performed better than Spleeter in preserving phonetic structure.
+- However, both methods still show errors — possibly due to unclear pronunciation or the limited support for Sanskrit in Whisper.
+- These tests demonstrate that **preprocessing improves transcription quality**, but more work is needed.
 
 ---
 
-## ✅ Conclusion
+## 🚧 Work in Progress
 
-This project shows that **preprocessing audio with Demucs** greatly improves downstream transcription and translation in noisy conditions. Future improvements may include:
+This project is still under active development. Our key goals include:
 
-- Voice activity detection
-- Enhanced noise profiling
-- Training with more Sanskrit-specific data
+- Improving transcription accuracy through better preprocessing
+- Fine-tuning or customizing Whisper for Sanskrit
+- Integrating **voice cloning with Tortoise** to generate personalized, natural-sounding speech outputs
+- Enhancing the pipeline for real-time or batch processing
 
 ---
 
-### 🔗 References
-- [Whisper by OpenAI](https://github.com/openai/whisper)
-- [Spleeter by Deezer](https://github.com/deezer/spleeter)
-- [Demucs by Facebook Research](https://github.com/facebookresearch/demucs)
-- [gTTS: Google Text-to-Speech](https://pypi.org/project/gTTS/)
+## 🔗 References
 
+- [Whisper (OpenAI)](https://github.com/openai/whisper)
+- [Spleeter (Deezer)](https://github.com/deezer/spleeter)
+- [Demucs (Meta)](https://github.com/facebookresearch/demucs)
+- [gTTS](https://pypi.org/project/gTTS/)
+- [Tortoise TTS](https://github.com/neonbjb/tortoise-tts)
