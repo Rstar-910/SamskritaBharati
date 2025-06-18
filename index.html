@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sanskrit Speech-to-Text Project</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 4rem 0;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      color: white;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.2); }
+      to { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 30px rgba(255,255,255,0.4); }
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .status-badge {
+      display: inline-block;
+      background: linear-gradient(45deg, #ff6b6b, #ffa500);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 600;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h2 {
+      color: #2b3a55;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card h3 {
+      color: #4a5568;
+      margin: 1.5rem 0 1rem 0;
+      font-size: 1.2rem;
+    }
+
+    .features-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .features-list li {
+      padding: 0.5rem 0;
+      position: relative;
+      padding-left: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .features-list li:before {
+      content: "✨";
+      position: absolute;
+      left: 0;
+      animation: sparkle 2s infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.8; }
+    }
+
+    .features-list li:hover {
+      color: #667eea;
+      transform: translateX(5px);
+    }
+
+    .audio-comparison {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+    }
+
+    .audio-comparison h2 {
+      color: white;
+    }
+
+    .sanskrit-text {
+      font-size: 1.3rem;
+      font-weight: 600;
+      text-align: center;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+    }
+
+    .audio-block {
+      margin: 1rem 0;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+
+    .audio-block:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.02);
+    }
+
+    .audio-block strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 0.5rem;
+      border-radius: 25px;
+      outline: none;
+    }
+
+    audio::-webkit-media-controls-panel {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 25px;
+    }
+
+    .files-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .files-list li {
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      background: linear-gradient(90deg, #e3f2fd, #f3e5f5);
+      border-radius: 8px;
+      border-left: 4px solid #667eea;
+      transition: all 0.3s ease;
+    }
+
+    .files-list li:hover {
+      transform: translateX(5px);
+      background: linear-gradient(90deg, #bbdefb, #e1bee7);
+    }
+
+    code {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-weight: 600;
+    }
+
+    .files-list a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .files-list a:hover {
+      text-decoration: underline;
+      color: #ffeb3b;
+    }
+
+    .references-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .references-list li {
+      margin: 0.5rem 0;
+    }
+
+    .references-list a {
+      display: block;
+      padding: 1rem;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      transform: translateX(0);
+    }
+
+    .references-list a:hover {
+      transform: translateX(5px) scale(1.02);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .observations {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+    }
+
+    .observations h2 {
+      color: white;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .comparison-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .comparison-item h4 {
+      margin-bottom: 0.5rem;
+      color: #ffeb3b;
+    }
+
+    .comparison-item p {
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      .container {
+        padding: 1rem;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .wip-section {
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      color: #333;
+      margin-top: 2rem;
+    }
+
+    .goals-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .goals-list li {
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      border-left: 4px solid #ff6b6b;
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .goals-list li:before {
+      content: "🎯";
+      position: absolute;
+      left: 1rem;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <h1>🕉 Sanskrit Speech-to-Text Project</h1>
+      <p>Developing a robust pipeline for transcribing Sanskrit audio, translating it, and generating high-quality speech output using advanced AI techniques.</p>
+      <div class="status-badge">🚀 In Progress</div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>🧪 Features</h2>
+        <ul class="features-list">
+          <li>Whisper-based transcription</li>
+          <li>Translation using Gemini</li>
+          <li>Speech generation using gTTS</li>
+          <li>Vocal separation preprocessing using Spleeter and Demucs</li>
+          <li>Voice cloning (upcoming) using Tortoise TTS</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>📂 Repository Files & Notebooks</h2>
+        <ul class="files-list">
+          <li><code><a href="Basic Pipeline.ipynb" target="_blank">Basic Pipeline.ipynb</a></code> – Core transcription & translation</li>
+          <li><code><a href="Preprocessing.ipynb" target="_blank">Preprocessing.ipynb</a></code> – Enhancing transcription using vocal separation</li>
+          <li><code>audio/</code> – Sample audio files for testing</li>
+          <li><code>README.md</code> – Documentation and explanation</li>
+        </ul>
+        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(102, 126, 234, 0.1); border-radius: 8px; border-left: 4px solid #667eea;">
+          <strong>💡 Tip:</strong> Click on the notebook files above to view them directly on GitHub Pages with full interactive rendering!
+        </div>
+      </div>
+    </div>
+
+    <div class="card audio-comparison">
+      <h2>🎧 Audio Comparison</h2>
+      <div class="sanskrit-text">यदा यदा हि धर्मस्य ग्लानिर्भवति भारत</div>
+      
+      <div class="audio-block">
+        <strong>🎵 Original:</strong>
+        <audio controls src="audio/test.mp3"></audio>
+      </div>
+      
+      <div class="audio-block">
+        <strong>🔧 Spleeter Processed:</strong>
+        <audio controls src="audio/spleeter.wav"></audio>
+      </div>
+      
+      <div class="audio-block">
+        <strong>⚡ Demucs Processed:</strong>
+        <audio controls src="audio/demucs.wav"></audio>
+      </div>
+    </div>
+
+    <div class="card observations">
+      <h2>📊 Transcription Results</h2>
+      <p><strong>Spoken Sanskrit:</strong> "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत"</p>
+      
+      <div class="comparison-grid">
+        <div class="comparison-item">
+          <h4>Without Preprocessing</h4>
+          <p>"ভি ডাঁট� Tibharata" - Heavily degraded due to background noise</p>
+        </div>
+        
+        <div class="comparison-item">
+          <h4>After Spleeter</h4>
+          <p>"जदायदाही भर्मस्ते नानेर्भोप्ती भारुता।" - Improved but still errors</p>
+        </div>
+        
+        <div class="comparison-item">
+          <h4>After Demucs</h4>
+          <p>"जदा जदाहि धर्मस्त। लानेर भप्ति भारत।" - Best results with better phonetic structure</p>
+        </div>
+      </div>
+      
+      <p><strong>Key Observation:</strong> Demucs significantly outperformed Spleeter in preserving phonetic structure, demonstrating that preprocessing improves transcription quality.</p>
+    </div>
+
+    <div class="card wip-section">
+      <h2>🚧 Work in Progress</h2>
+      <p>This project is under active development with the following key goals:</p>
+      <ul class="goals-list">
+        <li>Improving transcription accuracy through better preprocessing</li>
+        <li>Fine-tuning or customizing Whisper for Sanskrit</li>
+        <li>Integrating voice cloning with Tortoise for personalized speech outputs</li>
+        <li>Enhancing the pipeline for real-time or batch processing</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🔗 References</h2>
+      <ul class="references-list">
+        <li><a href="https://github.com/openai/whisper" target="_blank">🎙️ Whisper by OpenAI</a></li>
+        <li><a href="https://github.com/deezer/spleeter" target="_blank">🎵 Spleeter by Deezer</a></li>
+        <li><a href="https://github.com/facebookresearch/demucs" target="_blank">⚡ Demucs by Meta</a></li>
+        <li><a href="https://github.com/neonbjb/tortoise-tts" target="_blank">🐢 Tortoise TTS</a></li>
+        <li><a href="https://pypi.org/project/gTTS/" target="_blank">🗣️ Google Text-to-Speech</a></li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
