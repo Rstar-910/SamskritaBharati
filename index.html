@@ -553,6 +553,54 @@
           
           <p><strong>Limitations Identified:</strong> Despite preprocessing improvements, challenges remain in handling unclear pronunciation and Sanskrit-specific phonemic patterns not fully captured by current ASR models trained primarily on contemporary languages.</p>
         </div>
+        <div class="results-container">
+  <h3>Voice-to-Voice Conversation Test</h3>
+  
+  <div class="sanskrit-verse">
+    नमस्ते भवता नामाकिम्
+  </div>
+  <p><em>Conversational Sanskrit input evaluated using Whisper, Gemini, and ElevenLabs TTS</em></p>
+
+  <div class="audio-controls">
+    <div class="audio-item">
+      <label>User Input (Original):</label>
+      <audio controls src="conversation_sounds/voice.wav">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+    <div class="audio-item">
+      <label>AI Response (ElevenLabs):</label>
+      <audio controls src="conversation_sounds/output.mp3">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+  </div>
+
+  <h3>Transcription & Response</h3>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Stage</th>
+        <th>Output</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sanskrit Transcription</td>
+        <td>नमस्ते भवता नामाकिम्</td>
+      </tr>
+      <tr>
+        <td>Gemini Response</td>
+        <td>नमस्ते! मम नाम कृत्रिमबुद्धिः। भवता किं नाम?</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Observations</h3>
+  <p><strong>Pipeline Quality:</strong> The ElevenLabs model provided a highly natural-sounding response with accurate pronunciation. Transcription from Whisper was precise for clean inputs.</p>
+  <p><strong>Note:</strong> This example demonstrates the potential of real-time Sanskrit voice interfaces, combining ASR, language modeling, and expressive multilingual TTS.</p>
+</div>
+
       </section>
 
       <section id="implementation" class="section">
@@ -564,6 +612,8 @@
             <ul class="file-list">
               <li><a href="Basic_Pipeline.ipynb" target="_blank">Basic_Pipeline.ipynb</a> - Core transcription and translation pipeline</li>
               <li><a href="Preprocessing.ipynb" target="_blank">Preprocessing.ipynb</a> - Vocal separation and enhancement techniques</li>
+              <li><a href="sanskrit_voice_pipeline_" target="_blank">sanskrit_voice_pipeline_with_demucs_whisper_gemini_elevenlabs.ipynb</a> - Full voice-to-voice Sanskrit pipeline with Demucs, Whisper, Gemini, and ElevenLabs TTS</li>
+
               <li>audio/ - Sample datasets and processed audio files</li>
               <li>README.md - Comprehensive documentation</li>
             </ul>
