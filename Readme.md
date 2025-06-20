@@ -73,7 +73,7 @@ This project is still under active development. Our key goals include:
 ## 🆕 Updates
 | Date       | Update Summary                                                                                                                         |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| 2025-06-20 | Added `voice_to_voice_sanskrit_pipeline_elevenlabs.ipynb` for full conversation loop with Demucs, Whisper, Gemini, and ElevenLabs TTS. |
+| 2025-06-20 | Added `sanskrit_voice_pipeline_with_demucs_whisper_gemini_elevenlabs.ipynb` for full conversation loop with Demucs, Whisper, Gemini, and ElevenLabs TTS. |
 | 2025-06-20 | Created `conversation_sounds/` folder to store input/output audio and text samples for dialogue testing.                               |                                    |
 | 2025-06-20 | Planning to explore open-source voice cloning alternatives to ElevenLabs due to API limitations.                                       |
 
