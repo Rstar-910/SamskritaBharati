@@ -538,16 +538,7 @@
 
           <div class="audio-controls">
             <div class="audio-item">
-              <label>Original Audio:</label>
-              <audio controls src="audio/test.mp3">Your browser does not support audio playback.</audio>
-            </div>
-            <div class="audio-item">
-              <label>DeepFilterNet Processed:</label>
-              <audio controls src="audio/deepfilter_processed.wav">Your browser does not support audio playback.</audio>
-            </div>
-            <div class="audio-item">
-              <label>Sanskrit TTS Output:</label>
-              <audio controls src="audio/sanskrit_tts_output.wav">Your browser does not support audio playback.</audio>
+
             </div>
           </div>
 
@@ -565,18 +556,7 @@
                 <td>DeepFilterNet Filtering</td>
                 <td>Excellent noise reduction with preserved speech clarity</td>
                 <td>Sub-100ms latency for real-time processing</td>
-              </tr>
-              <tr>
-                <td>Faster Whisper Large-v3</td>
-                <td>Improved Sanskrit recognition accuracy</td>
-                <td>Real-time transcription with streaming capability</td>
-              </tr>
-              <tr>
-                <td>Gemini Text Correction</td>
-                <td>Contextual Sanskrit grammar and vocabulary correction</td>
-                <td>~200ms processing time per correction batch</td>
-              </tr>
-              <tr>
+
                 <td>Sanskrit TTS</td>
                 <td>Functional Sanskrit pronunciation</td>
                 <td>Moderate quality, planned improvements with xTTS-v2</td>
@@ -585,10 +565,7 @@
           </table>
 
           <h3>Key Improvements</h3>
-          <p><strong>Real-time Capability:</strong> The current pipeline achieves end-to-end processing less latency , making it suitable for interactive applications and live Sanskrit conversation systems.</p>
-          
-          <p><strong>Enhanced Accuracy:</strong> DeepFilterNet preprocessing combined with Faster Whisper Large-v3 and Gemini correction provides significantly improved transcription accuracy compared to previous approaches using basic vocal separation.</p>
-          
+
           <p><strong>Scalability:</strong> The modular design allows for easy replacement and upgrading of individual components as better models become available.</p>
         </div>
       </section>
@@ -603,7 +580,7 @@
               <li><a href="realtime_pipeline.ipynb" target="_blank">realtime_pipeline.ipynb</a> - Main real-time processing pipeline</li>
               <li><a href="deepfilter_preprocessing.ipynb" target="_blank">deepfilter_preprocessing.ipynb</a> - DeepFilterNet integration and testing</li>
               <li>audio/ - Test datasets and processed audio samples</li>
-              <li>models/ - Model configurations and fine-tuning scripts</li>
+
               <li>README.md - Complete setup and usage documentation</li>
             </ul>
           </div>
@@ -662,7 +639,7 @@ npm install
           <li><strong>Real-time Optimization:</strong> Further reduce processing latency through model optimization and hardware acceleration for mobile and edge deployment.</li>
           <li><strong>Sanskrit-specific ASR Fine-tuning:</strong> Fine-tune Faster Whisper on Sanskrit-specific datasets to improve phonetic recognition accuracy.</li>
           <li><strong>Voice Cloning Capabilities:</strong> Implement personalized voice synthesis for specific Sanskrit speakers or traditional recitation styles.</li>
-          <li><strong>Multi-modal Interface:</strong> Develop web and mobile applications for real-time Sanskrit conversation and learning tools.</li>
+
         </ul>
       </section>
 
