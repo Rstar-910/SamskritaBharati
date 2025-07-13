@@ -71,11 +71,15 @@ This project is still under active development. Our key goals include:
 
 ---
 ## 🆕 Updates
-| Date       | Update Summary                                                                                                                         |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Date       | Update Summary                                                                                                                                           |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 2025-06-20 | Added `sanskrit_voice_pipeline_with_demucs_whisper_gemini_elevenlabs.ipynb` for full conversation loop with Demucs, Whisper, Gemini, and ElevenLabs TTS. |
-| 2025-06-20 | Created `conversation_sounds/` folder to store input/output audio and text samples for dialogue testing.                               |                                    |
-| 2025-06-20 | Planning to explore open-source voice cloning alternatives to ElevenLabs due to API limitations.                                       |
+| 2025-06-20 | Created `conversation_sounds/` folder to store input/output audio and text samples for dialogue testing.                                                 |
+| 2025-06-20 | Planning to explore open-source voice cloning alternatives to ElevenLabs due to API limitations.                                                         |
+| 2025-06-30 | Used **VoiceFixer** and **Faster-Whisper** to enable near real-time speech enhancement and transcription.                                                |
+| 2025-07-04 | Integrated **DeepFilterNet** to further improve audio clarity and boost processing speed.                                                                |
+|  Present   | Currently experimenting with **Coqui XTTS** for Sanskrit voice synthesis as an open-source alternative.                                                  |
+
 
 ## 🔗 References
 
