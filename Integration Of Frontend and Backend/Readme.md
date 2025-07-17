@@ -93,6 +93,26 @@ Ensure MongoDB is running on your local system and create the required database 
    - Once the frontend starts, your web browser will automatically redirect to the application
    - Navigate to the **Advanced** section to view and interact with the questions
 
+4. **Configure Environment Variables**:
+   - Create a `.env` file in the **backend** root directory with the following content:
+
+     ```
+     PORT=8000
+     MONGODB_URI=mongodb://localhost:27017
+     CORS_ORIGIN=*
+     API_KEY=your_api_key
+     DB_URI=GPU_URI
+     FALLBACK_DB_URI=rverma251/Sanskrit_STT_DFN
+     ```
+
+   - Create a `.env` file in the **frontend** root directory with the following content:
+
+     ```
+     REACT_APP_MONGO_API=http://localhost:8000
+     REACT_APP_API_KEY=your_api_key
+     ```
+
+   - These environment variables are required to configure database access, API keys, CORS policy, and the GPU/CPU fallback logic in the backend.
 ## Features
 
 ### Core Functionality
@@ -119,7 +139,7 @@ Implemented a fallback mechanism in the backend: if a GPU is not available, the 
 
 Updated package.json to watch for changes in the .env file. This ensures that whenever .env is updated, the backend code is automatically redeployed.
 
-Refer to .env for the new variables:
+Refer to .env structure given above for the new variables:
 
 FALLBACK_DB_URI
 
