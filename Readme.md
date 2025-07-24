@@ -119,6 +119,45 @@ The website showcases our research methodology, results, and technical implement
 | **2025-07-13** | Created `deepfilter_preprocessing.ipynb` for noise reduction testing |
 
 ---
+## Updates
+
+## ASR (Automatic Speech Recognition)
+
+For critical cases requiring accurate Sanskrit recognition, we have implemented a pipeline using **Indic_ASR** integrated with **LangChain (Gemini)**. While the Whisper model remains available as an alternative, it has proven inferior to the Indic_ASR model for Sanskrit language processing.
+
+### Key Features:
+- Enhanced accuracy for Sanskrit speech recognition
+- Pipeline integration with LangChain and Gemini
+- Fallback support for Whisper model when needed
+
+## TTS (Text-to-Speech)
+
+We have successfully fine-tuned a TTS model using **Orpheus-3B** with **Unsloth** on the Sanskrit dataset from **ai4bharat/Kathbath**. The model demonstrates good performance for Sanskrit text-to-speech synthesis.
+
+### Current Status:
+- **Working Solution**: Orpheus-3B fine-tuned model showing good performance
+- **Research in Progress**: Investigating Coqui XTTS integration
+  - Unable to fine-tune Coqui XTTS currently
+  - Requires further research on fine-tuning methodologies
+
+### Implementation Details:
+- **Audio Samples**: Available in `TTS-audios` folder
+- **Code Implementation**: Located in `TTS.py`
+- **Model Deployment**: Hosted on Hugging Face
+
+### Model Access:
+- **Hugging Face Model**: [rverma0631/lora_model_sanskrit_tts](https://huggingface.co/rverma0631/lora_model_sanskrit_tts)
+- **Important**: Ensure you are logged into Hugging Face when using the model locally
+
+### Environment Setup:
+- **Dependencies**: All required libraries are listed in `tts_requirements.txt`
+- Contains complete environment configuration used for TTS development
+
+### Usage Notes:
+- Model performs well for Sanskrit TTS tasks
+- Local usage requires Hugging Face authentication
+- Ongoing evaluation and improvements in progress
+---
 
 ## 🎯 Future Work
 
