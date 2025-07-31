@@ -146,7 +146,7 @@ We have successfully fine-tuned a TTS model using **Orpheus-3B** with **Unsloth*
 - **Model Deployment**: Hosted on Hugging Face
 
 ### Model Access:
-- **Hugging Face Model**: [rverma0631/lora_model_sanskrit_tts](https://huggingface.co/rverma0631/lora_model_sanskrit_tts)
+- **Hugging Face Model**: [rverma0631/Sanskrit_TTS](https://huggingface.co/rverma0631/Sanskrit_TTS)
 - **Important**: Ensure you are logged into Hugging Face when using the model locally
 
 ### Environment Setup:
