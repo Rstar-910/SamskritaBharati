@@ -4,7 +4,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-"dev": "nodemon --watch .env -r dotenv/config --experimental-json-modules src/index.js"
+    "dev": "nodemon --watch .env -r dotenv/config --experimental-json-modules src/index.js"
   },
   "author": "Anmol",
   "license": "ISC",
@@ -14,6 +14,8 @@
     "prettier": "^3.5.3"
   },
   "dependencies": {
+    "@langchain/core": "^0.3.66",
+    "@langchain/google-genai": "^0.2.16",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
